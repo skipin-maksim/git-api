@@ -1,8 +1,12 @@
-import { createAction } from '@reduxjs/toolkit';
+import { createAction } from "@reduxjs/toolkit";
 
-const getRepositories = createAction('REPOSITORIES_GET');
+const getRepositoriesRequest = createAction("GIT_DATA_getRepositoriesRequest");
+const getRepositoriesSuccess = createAction("GIT_DATA_getRepositoriesSuccess");
+const getRepositoriesError = createAction("GIT_DATA_getRepositoriesError");
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-    getRepositories,
+    getRepositoriesRequest,
+    getRepositoriesSuccess,
+    getRepositoriesError,
 };

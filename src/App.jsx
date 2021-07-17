@@ -1,22 +1,31 @@
 import { useCallback, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { gitDataActions } from "./redux/gitData";
+import { useDispatch, useSelector } from "react-redux";
+
+import { gitDataOperations, gitDataSelectors } from "./redux/gitData";
 
 import "./App.module.scss";
 
 function App() {
+    const repositoriesList = useSelector(gitDataSelectors.getAllRepositoriesList);
     const dispatch = useDispatch();
 
     const getRepositories = useCallback(
-        () => dispatch(gitDataActions.getRepositories()),
+        (searchQuery, page) =>
+            dispatch(gitDataOperations.getRepositories(searchQuery, page)),
         [dispatch],
     );
 
     useEffect(() => {
-        getRepositories();
+        getRepositories("react", 1);
     }, [getRepositories]);
 
-    return <div>Настроено</div>;
+    return (
+        <div>
+            {repositoriesList.map(item => (
+                <div>{item.full_name}</div>
+            ))}
+        </div>
+    );
 }
 
 export default App;
