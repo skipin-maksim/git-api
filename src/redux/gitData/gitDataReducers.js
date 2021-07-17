@@ -3,11 +3,11 @@ import { createReducer } from "@reduxjs/toolkit";
 import { gitDataActions } from ".";
 
 const repositoriesList = createReducer([], {
-    [gitDataActions.getRepositoriesSuccess]: (state, { payload }) =>
+    [gitDataActions.fetchRepositoriesSuccess]: (state, { payload }) =>
         payload.items,
 });
 const currentPage = createReducer(null, {
-    [gitDataActions.getRepositoriesSuccess]: (state, { payload }) =>
+    [gitDataActions.fetchRepositoriesSuccess]: (state, { payload }) =>
         payload.page,
 });
 

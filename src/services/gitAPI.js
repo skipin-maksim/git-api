@@ -4,7 +4,7 @@ const octokit = new Octokit({
     auth: process.env.REACT_APP_AUTH_TOKEN,
 });
 
-export const getAllRepoWithSearch = async (searchQuery, page) => {
+export const fetchRepoWithSearchGitApi = async (searchQuery, page) => {
     return await octokit.request(`GET /search/repositories`, {
         q: searchQuery,
         per_page: 10,

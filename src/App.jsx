@@ -6,20 +6,21 @@ import { gitDataOperations, gitDataSelectors } from "./redux/gitData";
 import "./App.module.scss";
 
 function App() {
+    const dispatch = useDispatch();
+
     const repositoriesList = useSelector(
         gitDataSelectors.getAllRepositoriesList,
     );
-    const dispatch = useDispatch();
 
-    const getRepositories = useCallback(
+    const fetchRepositories = useCallback(
         (searchQuery, page) =>
-            dispatch(gitDataOperations.getRepositories(searchQuery, page)),
+            dispatch(gitDataOperations.fetchRepositories(searchQuery, page)),
         [dispatch],
     );
 
     useEffect(() => {
-        getRepositories("react", 1);
-    }, [getRepositories]);
+        fetchRepositories("react", 1);
+    }, [fetchRepositories]);
 
     return (
         <div>

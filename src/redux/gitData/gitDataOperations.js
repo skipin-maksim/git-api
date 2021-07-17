@@ -1,24 +1,24 @@
 import { gitDataActions } from "./index";
-import { getAllRepoWithSearch } from "../../services/gitAPI";
+import { fetchRepoWithSearchGitApi } from "../../services/gitAPI";
 
-const getRepositories = (searchQuery, page) => async dispatch => {
-    dispatch(gitDataActions.getRepositoriesRequest());
+const fetchRepositories = (searchQuery, page) => async dispatch => {
+    dispatch(gitDataActions.fetchRepositoriesRequest());
 
     try {
-        const response = await getAllRepoWithSearch(searchQuery, page);
+        const response = await fetchRepoWithSearchGitApi(searchQuery, page);
 
         dispatch(
-            gitDataActions.getRepositoriesSuccess({
+            gitDataActions.fetchRepositoriesSuccess({
                 items: response.data.items,
                 page,
             }),
         );
     } catch (error) {
-        dispatch(gitDataActions.getRepositoriesError());
+        dispatch(gitDataActions.fetchRepositoriesError());
 
         console.error(error);
     }
 };
 
 // eslint-disable-next-line
-export default { getRepositories };
+export default { fetchRepositories };
