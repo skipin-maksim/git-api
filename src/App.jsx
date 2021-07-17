@@ -6,7 +6,9 @@ import { gitDataOperations, gitDataSelectors } from "./redux/gitData";
 import "./App.module.scss";
 
 function App() {
-    const repositoriesList = useSelector(gitDataSelectors.getAllRepositoriesList);
+    const repositoriesList = useSelector(
+        gitDataSelectors.getAllRepositoriesList,
+    );
     const dispatch = useDispatch();
 
     const getRepositories = useCallback(
