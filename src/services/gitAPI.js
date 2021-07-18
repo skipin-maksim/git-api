@@ -15,5 +15,5 @@ export const fetchRepoWithSearchGitApi = async (
         page: page,
     });
 
-    return { data, page, per_page, searchQuery };
+    return { ...data, page, per_page, searchQuery };
 };
