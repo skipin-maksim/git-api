@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import { Pagination } from "antd";
-import Loader from "react-loader-spinner";
 
 import EmptyMsg from "./components/EmptyMsg/EmptyMsg";
 
@@ -14,7 +13,6 @@ import { createQueryString } from "./helpers/createQueryString";
 
 import s from "./App.module.scss";
 import RepositoriesList from "./components/RepositoriesList/RepositoriesList";
-import Overlay from "./components/Overlay/Overlay";
 
 const App = () => {
     const dispatch = useDispatch();
@@ -23,11 +21,9 @@ const App = () => {
     const location = useLocation();
 
     const { getSearchValue, getPerPage, getPage } = searchDataSelectors;
-    const { getAllRepositoriesList, getIsLoading, getTotalCount } =
-        gitDataSelectors;
+    const { getAllRepositoriesList, getTotalCount } = gitDataSelectors;
 
     const repositoriesList = useSelector(getAllRepositoriesList);
-    const isLoading = useSelector(getIsLoading);
     let totalCount = useSelector(getTotalCount);
     const currentSearchValue = useSelector(getSearchValue);
     const currentSearchPerPage = useSelector(getPerPage);
@@ -58,7 +54,7 @@ const App = () => {
         });
     };
 
-    const handleChangePagination = e => {
+    const handleOnChangePagination = e => {
         scrollToTop();
         updatePage(e);
     };
@@ -81,7 +77,7 @@ const App = () => {
             <form>Тут будет инпут</form>
 
             <div className={s.content}>
-                {!repositoriesList.length && !isLoading && (
+                {!repositoriesList.length && (
                     <EmptyMsg value={currentSearchValue} />
                 )}
 
@@ -94,22 +90,10 @@ const App = () => {
                             current={currentSearchPage}
                             defaultPageSize={currentSearchPerPage}
                             showSizeChanger={false}
-                            onChange={handleChangePagination}
+                            onChange={handleOnChangePagination}
                             size={"small"}
                         />
                     </>
-                )}
-
-                {isLoading && (
-                    <Overlay>
-                        <Loader
-                            type="Puff"
-                            color="#232aa8"
-                            height={50}
-                            width={50}
-                            timeout={10000}
-                        />
-                    </Overlay>
                 )}
             </div>
         </div>

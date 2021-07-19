@@ -1,5 +1,3 @@
-import React from "react";
-
 import s from "./SubList.module.scss";
 
 const SubList = ({ list }) => {

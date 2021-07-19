@@ -1,15 +1,23 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Loader from "react-loader-spinner";
 
 import { fetchLanguages } from "../../services/gitAPI";
+
 import SubList from "../SubList/SubList";
+import Overlay from "../Overlay/Overlay";
+
+import { gitDataSelectors } from "../../redux/gitData";
 
 import s from "./Repository.module.scss";
 
 const Repository = ({ item }) => {
+    const dispatch = useDispatch();
     const [languages, setLanguages] = useState([]);
+    const isLoading = useSelector(gitDataSelectors.getIsLoading);
 
     const getLanguages = async () => {
-        const data = await fetchLanguages(item.languages_url);
+        const data = await fetchLanguages(item.languages_url, dispatch);
 
         let stringLanguages = "";
         for (const key in data) {
@@ -48,6 +56,18 @@ const Repository = ({ item }) => {
             <div className={s.right_content}>
                 <SubList list={dataForRightList} />
             </div>
+
+            {isLoading && (
+                <Overlay>
+                    <Loader
+                        type="Puff"
+                        color="#232aa8"
+                        height={50}
+                        width={50}
+                        timeout={10000}
+                    />
+                </Overlay>
+            )}
         </li>
     );
 };

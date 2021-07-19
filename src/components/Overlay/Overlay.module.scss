@@ -7,9 +7,5 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.8);
-
-  & > div {
-    filter: blur(0) !important;
-  }
+  background: #fff;
 }

@@ -1,5 +1,6 @@
 import { Octokit } from "@octokit/core";
 import axios from "axios";
+import { gitDataActions } from "../redux/gitData";
 
 const token = "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";
 
@@ -21,12 +22,21 @@ export const fetchRepoWithSearchGitApi = async (
     return { ...data, page, per_page, searchQuery };
 };
 
-export const fetchLanguages = async url => {
-    const { data } = await axios(url, {
-        headers: {
-            Authorization: token,
-        },
-    });
+export const fetchLanguages = async (url, dispatch) => {
+    dispatch(gitDataActions.isLoading(true));
 
-    return data;
+    try {
+        const { data } = await axios(url, {
+            headers: {
+                Authorization: `Bearer  ${token}`,
+            },
+        });
+
+        return data;
+    } catch (err) {
+        console.log(err);
+        return {};
+    } finally {
+        dispatch(gitDataActions.isLoading(false));
+    }
 };
