@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
+import queryString from "query-string";
+
 import { Pagination } from "antd";
 
 import EmptyMsg from "./components/EmptyMsg/EmptyMsg";
@@ -8,22 +10,20 @@ import EmptyMsg from "./components/EmptyMsg/EmptyMsg";
 import { searchDataSelectors } from "./redux/searchData";
 import { gitDataOperations, gitDataSelectors } from "./redux/gitData";
 
-import { useQuery } from "./helpers/useQuery";
-import { createQueryString } from "./helpers/createQueryString";
-
 import s from "./App.module.scss";
 import RepositoriesList from "./components/RepositoriesList/RepositoriesList";
 
 const App = () => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const query = useQuery();
     const location = useLocation();
 
     const { getSearchValue, getPerPage, getPage } = searchDataSelectors;
-    const { getAllRepositoriesList, getTotalCount } = gitDataSelectors;
+    const { getAllRepositoriesList, getTotalCount, getIsLoading } =
+        gitDataSelectors;
 
     const repositoriesList = useSelector(getAllRepositoriesList);
+    const isLoading = useSelector(getIsLoading);
     let totalCount = useSelector(getTotalCount);
     const currentSearchValue = useSelector(getSearchValue);
     const currentSearchPerPage = useSelector(getPerPage);
@@ -31,20 +31,20 @@ const App = () => {
 
     if (totalCount > 1000) totalCount = 1000;
 
-    const fetchSearch = () => {
-        const page = query.get("page");
-        const searchQuery = query.get("q");
-        const perPage = query.get("per_page");
+    const qs = {
+        q: currentSearchValue,
+        per_page: currentSearchPerPage,
+        page: currentSearchPage,
+    };
 
-        dispatch(
-            gitDataOperations.fetchRepositories(searchQuery, page, perPage),
-        );
+    const fetchSearch = () => {
+        const { q, per_page, page } = queryString.parse(location.search);
+        dispatch(gitDataOperations.fetchRepositories(q, per_page, page));
     };
 
     const updatePage = page => {
-        history.push(
-            createQueryString(currentSearchValue, currentSearchPerPage, page),
-        );
+        qs.page = page;
+        history.push(`?${queryString.stringify(qs)}`);
     };
 
     const scrollToTop = () => {
@@ -60,16 +60,12 @@ const App = () => {
     };
 
     useEffect(() => {
-        if (!location.search)
-            history.push(
-                createQueryString(
-                    currentSearchValue,
-                    currentSearchPerPage,
-                    currentSearchPage,
-                ),
-            );
+        if (!location.search) {
+            history.push(`?${queryString.stringify(qs)}`);
+            return;
+        }
 
-        if (location.search) fetchSearch();
+        fetchSearch();
     }, [location.search]);
 
     return (

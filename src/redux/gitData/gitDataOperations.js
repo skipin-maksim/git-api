@@ -2,7 +2,7 @@ import { gitDataActions } from "./index";
 import { fetchRepoWithSearchGitApi } from "../../services/gitAPI";
 import { searchDataActions } from "../searchData";
 
-const fetchRepositories = (searchQuery, page, perPage) => async dispatch => {
+const fetchRepositories = (searchQuery, perPage, page) => async dispatch => {
     dispatch(gitDataActions.fetchRepositoriesRequest());
 
     try {
