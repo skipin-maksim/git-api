@@ -4,12 +4,16 @@ import Loader from "react-loader-spinner";
 
 import { fetchLanguages } from "../../services/gitAPI";
 
-import SubList from "../SubList/SubList";
+import InfoList from "../InfoList/InfoList";
 import Overlay from "../Overlay/Overlay";
 
 import { gitDataSelectors } from "../../redux/gitData";
 
+import starIcon from "../../assets/star-icon.svg";
+import watchersIcon from "../../assets/watchers-icon.svg";
+
 import s from "./Repository.module.scss";
+import StatsList from "../StatsList/StatsList";
 
 const Repository = ({ item }) => {
     const dispatch = useDispatch();
@@ -37,8 +41,8 @@ const Repository = ({ item }) => {
     ];
 
     const dataForRightList = [
-        { value: item.stargazers_count, title: "stars" },
-        { value: item.watchers_count, title: "watchers" },
+        { value: item.stargazers_count, title: "stars", icon: starIcon },
+        { value: item.watchers_count, title: "watchers", icon: watchersIcon },
     ];
 
     useEffect(() => {
@@ -55,11 +59,11 @@ const Repository = ({ item }) => {
                 <div className={s.left_content}>
                     <img src={item.owner.avatar_url} alt="avatar" />
 
-                    <SubList list={dataForLeftList} />
+                    <InfoList list={dataForLeftList} />
                 </div>
 
                 <div className={s.right_content}>
-                    <SubList list={dataForRightList} />
+                    <StatsList list={dataForRightList} />
                 </div>
             </a>
 

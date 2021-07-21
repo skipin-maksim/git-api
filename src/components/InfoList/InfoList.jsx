@@ -1,6 +1,6 @@
-import s from "./SubList.module.scss";
+import s from "./InfoList.module.scss";
 
-const SubList = ({ list }) => {
+const InfoList = ({ list }) => {
     return (
         <ul className={s.sub_list}>
             {list?.map((item, idx) => (
@@ -12,4 +12,4 @@ const SubList = ({ list }) => {
     );
 };
 
-export default SubList;
+export default InfoList;
