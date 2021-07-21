@@ -12,7 +12,7 @@ const perPage = createReducer(4, {
         payload.perPage,
 });
 
-const searchValue = createReducer("react", {
+const searchValue = createReducer("", {
     [searchDataActions.writeSearchData]: (state, { payload }) =>
         payload.searchValue,
 });

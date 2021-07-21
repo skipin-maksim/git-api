@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import queryString from "query-string";
@@ -19,11 +19,9 @@ const App = () => {
     const location = useLocation();
 
     const { getSearchValue, getPerPage, getPage } = searchDataSelectors;
-    const { getAllRepositoriesList, getTotalCount, getIsLoading } =
-        gitDataSelectors;
+    const { getAllRepositoriesList, getTotalCount } = gitDataSelectors;
 
     const repositoriesList = useSelector(getAllRepositoriesList);
-    const isLoading = useSelector(getIsLoading);
     let totalCount = useSelector(getTotalCount);
     const currentSearchValue = useSelector(getSearchValue);
     const currentSearchPerPage = useSelector(getPerPage);
@@ -61,6 +59,7 @@ const App = () => {
 
     useEffect(() => {
         if (!location.search) {
+            qs.q = "react";
             history.push(`?${queryString.stringify(qs)}`);
             return;
         }
