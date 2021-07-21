@@ -3,6 +3,14 @@
     display: flex;
     justify-content: flex-end;
 
+    @media (min-width: 1280px) {
+      justify-content: flex-start;
+    }
+
+    span {
+      white-space: nowrap;
+    }
+
     .icon {
       width: 20px;
       margin-right: 10px;

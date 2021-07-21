@@ -33,3 +33,34 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
   monospace;
 }
+
+.ant-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .ant-pagination-prev,
+  .ant-pagination-next {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    height: auto !important;
+
+    @media (min-width: 480px) {
+      padding: 0 15px;
+      width: auto;
+      height: 24px !important;
+    }
+
+  }
+
+  .ant-pagination-item-active {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+    border-width: 3px;
+  }
+}
+
+

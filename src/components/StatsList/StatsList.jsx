@@ -6,7 +6,7 @@ const StatsList = ({ list }) => {
             {list?.map((item, idx) => (
                 <li key={`id-${idx}`}>
                     <img className={s.icon} src={item.icon} alt="stats" />
-                    {item.value} {item.title}
+                    <span>{`${item.value} ${item.title}`}</span>
                 </li>
             ))}
         </ul>

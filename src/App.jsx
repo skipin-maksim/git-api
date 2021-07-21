@@ -6,14 +6,15 @@ import debounce from "lodash.debounce";
 
 import { Pagination } from "antd";
 
+import RepositoriesList from "./components/RepositoriesList/RepositoriesList";
+import Form from "./components/Form/Form";
 import EmptyMsg from "./components/EmptyMsg/EmptyMsg";
 
 import { searchDataSelectors } from "./redux/searchData";
 import { gitDataOperations, gitDataSelectors } from "./redux/gitData";
+import { itemRender } from "./helpers/paginationHelper";
 
 import s from "./App.module.scss";
-import RepositoriesList from "./components/RepositoriesList/RepositoriesList";
-import Form from "./components/Form/Form";
 
 const App = () => {
     const dispatch = useDispatch();
@@ -132,6 +133,7 @@ const App = () => {
                             showSizeChanger={false}
                             onChange={handleOnChangePagination}
                             size={"small"}
+                            itemRender={itemRender}
                         />
                     </>
                 )}

@@ -5,6 +5,7 @@ import Loader from "react-loader-spinner";
 import { fetchLanguages } from "../../services/gitAPI";
 
 import InfoList from "../InfoList/InfoList";
+import StatsList from "../StatsList/StatsList";
 import Overlay from "../Overlay/Overlay";
 
 import { gitDataSelectors } from "../../redux/gitData";
@@ -13,7 +14,6 @@ import starIcon from "../../assets/star-icon.svg";
 import watchersIcon from "../../assets/watchers-icon.svg";
 
 import s from "./Repository.module.scss";
-import StatsList from "../StatsList/StatsList";
 
 const Repository = ({ item }) => {
     const dispatch = useDispatch();
@@ -56,14 +56,20 @@ const Repository = ({ item }) => {
                 href={item.html_url}
                 target="_blank"
             >
-                <div className={s.left_content}>
-                    <img src={item.owner.avatar_url} alt="avatar" />
+                <img
+                    className={s.avatar}
+                    src={item.owner.avatar_url}
+                    alt="avatar"
+                />
 
-                    <InfoList list={dataForLeftList} />
-                </div>
+                <div className={s.content}>
+                    <div className={s.left_content}>
+                        <InfoList list={dataForLeftList} />
+                    </div>
 
-                <div className={s.right_content}>
-                    <StatsList list={dataForRightList} />
+                    <div className={s.right_content}>
+                        <StatsList list={dataForRightList} />
+                    </div>
                 </div>
             </a>
 
