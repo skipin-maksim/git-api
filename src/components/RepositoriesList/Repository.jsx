@@ -47,15 +47,21 @@ const Repository = ({ item }) => {
 
     return (
         <li className={s.repository}>
-            <div className={s.left_content}>
-                <img src={item.owner.avatar_url} alt="avatar" />
+            <a
+                className={s.repository_link}
+                href={item.html_url}
+                target="_blank"
+            >
+                <div className={s.left_content}>
+                    <img src={item.owner.avatar_url} alt="avatar" />
 
-                <SubList list={dataForLeftList} />
-            </div>
+                    <SubList list={dataForLeftList} />
+                </div>
 
-            <div className={s.right_content}>
-                <SubList list={dataForRightList} />
-            </div>
+                <div className={s.right_content}>
+                    <SubList list={dataForRightList} />
+                </div>
+            </a>
 
             {isLoading && (
                 <Overlay>

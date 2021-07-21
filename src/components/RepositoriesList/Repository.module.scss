@@ -1,14 +1,22 @@
 .repository {
   position: relative;
   padding: 15px;
-  //display: flex;
-  //justify-content: space-between;
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid transparent;
+  transition: all 0.2s linear;
 
   &:not(:last-child) {
     margin-bottom: 10px;
+  }
+
+  &:hover {
+    border: 1px solid #40a9ff;
+  }
+
+  .repository_link {
+    color: inherit;
   }
 }
 

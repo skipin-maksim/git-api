@@ -13,6 +13,7 @@ import { gitDataOperations, gitDataSelectors } from "./redux/gitData";
 
 import s from "./App.module.scss";
 import RepositoriesList from "./components/RepositoriesList/RepositoriesList";
+import Form from "./components/Form/Form";
 
 const App = () => {
     const dispatch = useDispatch();
@@ -22,9 +23,11 @@ const App = () => {
     const [inputSearchValue, setInputSearchValue] = useState("");
 
     const { getSearchValue, getPerPage, getPage } = searchDataSelectors;
-    const { getAllRepositoriesList, getTotalCount } = gitDataSelectors;
+    const { getAllRepositoriesList, getTotalCount, getIsLoading } =
+        gitDataSelectors;
 
     const repositoriesList = useSelector(getAllRepositoriesList);
+    const isLoading = useSelector(getIsLoading);
     let totalCount = useSelector(getTotalCount);
     const currentSearchValue = useSelector(getSearchValue);
     const currentSearchPerPage = useSelector(getPerPage);
@@ -91,10 +94,10 @@ const App = () => {
     );
 
     useEffect(() => {
-        const qs = getQueryString();
-
         if (!search) {
+            const qs = getQueryString();
             qs.q = "react";
+
             history.push(`?${queryString.stringify(qs)}`);
             setInputSearchValue(qs.q);
 
@@ -106,13 +109,12 @@ const App = () => {
 
     return (
         <div className={s.container}>
-            <form onSubmit={e => handleSubmit(inputSearchValue, e)}>
-                <input
-                    type="text"
-                    value={inputSearchValue}
-                    onChange={handleOnChangeInput}
-                />
-            </form>
+            <Form
+                handleSubmit={handleSubmit}
+                inputSearchValue={inputSearchValue}
+                handleOnChangeInput={handleOnChangeInput}
+                isLoading={isLoading}
+            />
 
             <div className={s.content}>
                 {!repositoriesList.length && (
