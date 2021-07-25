@@ -63,13 +63,9 @@ const Repository = ({ item }) => {
                 />
 
                 <div className={s.content}>
-                    <div className={s.left_content}>
-                        <InfoList list={dataForLeftList} />
-                    </div>
+                    <InfoList list={dataForLeftList} />
 
-                    <div className={s.right_content}>
-                        <StatsList list={dataForRightList} />
-                    </div>
+                    <StatsList list={dataForRightList} />
                 </div>
             </a>
 

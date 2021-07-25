@@ -1,4 +1,8 @@
 .sub_list {
+  @media (min-width: 1280px) {
+    width: 70%;
+  }
+
   li:not(:last-child) {
     margin-bottom: 10px;
   }

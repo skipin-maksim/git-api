@@ -1,23 +1,38 @@
 .stats_list {
-  li {
-    display: flex;
-    justify-content: flex-end;
+    margin-top: 15px;
+    padding-top: 15px;
+    text-align: right;
+    border-top: 1px solid lightgrey;
 
-    @media (min-width: 1280px) {
-      justify-content: flex-start;
+    @media (min-width: 768px) {
+        border-top: 0;
+        padding: 0;
+        margin: 0 0 0 15px;
+
+        @media (min-width: 1280px) {
+            width: 21%;
+        }
     }
 
-    span {
-      white-space: nowrap;
+    li {
+        display: flex;
+        justify-content: flex-end;
+
+        @media (min-width: 1280px) {
+            justify-content: flex-start;
+        }
+
+        span {
+            white-space: nowrap;
+        }
+
+        .icon {
+            width: 20px;
+            margin-right: 10px;
+        }
     }
 
-    .icon {
-      width: 20px;
-      margin-right: 10px;
+    li:not(:last-child) {
+        margin-bottom: 10px;
     }
-  }
-
-  li:not(:last-child) {
-    margin-bottom: 10px;
-  }
 }
