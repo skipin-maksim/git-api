@@ -55,6 +55,7 @@ const Repository = ({ item }) => {
                 className={s.repository_link}
                 href={item.html_url}
                 target="_blank"
+                rel="noreferrer"
             >
                 <img
                     className={s.avatar}

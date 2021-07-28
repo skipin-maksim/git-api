@@ -97,7 +97,6 @@ const App = () => {
     useEffect(() => {
         if (!search) {
             const qs = getQueryString();
-            qs.q = "react";
 
             history.push(`?${queryString.stringify(qs)}`);
             setInputSearchValue(qs.q);

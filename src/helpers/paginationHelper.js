@@ -1,9 +1,9 @@
 export function itemRender(current, type, originalElement) {
     if (type === "prev") {
-        return <a>Previous</a>;
+        return <div>Previous</div>;
     }
     if (type === "next") {
-        return <a>Next</a>;
+        return <div>Next</div>;
     }
     return originalElement;
 }
