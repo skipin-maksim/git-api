@@ -13,8 +13,8 @@ const RepositoriesList = () => {
 
     return (
         <ul className={s.repositories_list}>
-            {repositoriesList.map(item => (
-                <Repository key={item.id} item={item} />
+            {repositoriesList.map(repository => (
+                <Repository key={repository.id} repository={repository} />
             ))}
         </ul>
     );

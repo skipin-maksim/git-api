@@ -24,11 +24,12 @@ const App = () => {
     const [inputSearchValue, setInputSearchValue] = useState("");
 
     const { getSearchValue, getPerPage, getPage } = searchDataSelectors;
-    const { getAllRepositoriesList, getTotalCount, getIsLoading } =
+    const { getAllRepositoriesList, getTotalCount, getIsLoading, getIsEmpty } =
         gitDataSelectors;
 
     const repositoriesList = useSelector(getAllRepositoriesList);
     const isLoading = useSelector(getIsLoading);
+    const isEmpty = useSelector(getIsEmpty);
     let totalCount = useSelector(getTotalCount);
     const currentSearchValue = useSelector(getSearchValue);
     const currentSearchPerPage = useSelector(getPerPage);
@@ -39,6 +40,7 @@ const App = () => {
     const getQueryString = () => {
         const qs = queryString.parse(search);
 
+        // query string default values
         qs.q = currentSearchValue;
         qs.per_page = currentSearchPerPage;
         qs.page = currentSearchPage;
@@ -56,7 +58,7 @@ const App = () => {
     };
 
     const updatePage = page => {
-        const qs = getQueryString();
+        const qs = getQueryString(search);
         qs.page = page;
         history.push(`?${queryString.stringify(qs)}`);
     };
@@ -82,7 +84,7 @@ const App = () => {
         if (e) e.preventDefault();
 
         if (value) {
-            const qs = getQueryString();
+            const qs = getQueryString(search);
             qs.q = value;
 
             history.push(`?${queryString.stringify(qs)}`);
@@ -96,7 +98,7 @@ const App = () => {
 
     useEffect(() => {
         if (!search) {
-            const qs = getQueryString();
+            const qs = getQueryString(search);
 
             history.push(`?${queryString.stringify(qs)}`);
             setInputSearchValue(qs.q);
@@ -117,9 +119,7 @@ const App = () => {
             />
 
             <div className={s.content}>
-                {!repositoriesList.length && (
-                    <EmptyMsg value={currentSearchValue} />
-                )}
+                {isEmpty && <EmptyMsg value={currentSearchValue} />}
 
                 {repositoriesList.length > 0 && (
                     <>

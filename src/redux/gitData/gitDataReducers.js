@@ -16,8 +16,14 @@ const isLoading = createReducer(false, {
     [gitDataActions.isLoading]: (state, { payload }) => payload,
 });
 
+const isEmpty = createReducer(false, {
+    [gitDataActions.fetchRepositoriesSuccess]: (state, { payload }) =>
+        payload.items.length === 0,
+});
+
 export default combineReducers({
     repositoriesList,
     total_count,
     isLoading,
+    isEmpty,
 });

@@ -4,6 +4,7 @@ import { searchDataActions } from "../searchData";
 
 const fetchRepositories = (searchQuery, perPage, page) => async dispatch => {
     dispatch(gitDataActions.fetchRepositoriesRequest());
+    dispatch(gitDataActions.isLoading(true));
 
     try {
         const response = await fetchRepoWithSearchGitApi(
@@ -25,6 +26,11 @@ const fetchRepositories = (searchQuery, perPage, page) => async dispatch => {
         dispatch(gitDataActions.fetchRepositoriesError());
 
         console.error(error);
+    } finally {
+        //For a longer lasting effect, skeleton
+        setTimeout(() => {
+            dispatch(gitDataActions.isLoading(false));
+        }, 700);
     }
 };
 
