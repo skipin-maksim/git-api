@@ -7,7 +7,7 @@ const currentPage = createReducer(1, {
         Number(payload.page),
 });
 
-const perPage = createReducer(4, {
+const perPage = createReducer(10, {
     [searchDataActions.writeSearchData]: (state, { payload }) =>
         payload.perPage,
 });
