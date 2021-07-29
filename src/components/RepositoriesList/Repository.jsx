@@ -1,20 +1,19 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { Skeleton } from "antd";
 
+import {
+    getDataForLeftList,
+    getDataForRightList,
+} from "../../helpers/languagesDataHelper";
 import { fetchLanguages } from "../../services/gitAPI";
+import { gitDataSelectors } from "../../redux/gitData";
 
 import InfoList from "../InfoList/InfoList";
 import StatsList from "../StatsList/StatsList";
 import Overlay from "../Overlay/Overlay";
 
-import { gitDataSelectors } from "../../redux/gitData";
-
 import s from "./Repository.module.scss";
-import { Skeleton } from "antd";
-import {
-    getDataForLeftList,
-    getDataForRightList,
-} from "../../helpers/languagesDataHelper";
 
 const Repository = ({ repository }) => {
     const [languages, setLanguages] = useState([]);

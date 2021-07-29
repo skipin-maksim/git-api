@@ -3,16 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import queryString from "query-string";
 import debounce from "lodash.debounce";
-
 import { Pagination } from "antd";
-
-import RepositoriesList from "./components/RepositoriesList/RepositoriesList";
-import Form from "./components/Form/Form";
-import EmptyMsg from "./components/EmptyMsg/EmptyMsg";
 
 import { searchDataSelectors } from "./redux/searchData";
 import { gitDataOperations, gitDataSelectors } from "./redux/gitData";
 import { itemRender } from "./helpers/paginationHelper";
+
+import RepositoriesList from "./components/RepositoriesList/RepositoriesList";
+import Form from "./components/Form/Form";
+import EmptyMsg from "./components/EmptyMsg/EmptyMsg";
 
 import s from "./App.module.scss";
 

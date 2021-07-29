@@ -1,5 +1,5 @@
 const EmptyMsg = ({ value }) => {
-    return <p>По запросу {value}, ничего не найдено</p>;
+    return <p>For {value}, nothing was found.</p>;
 };
 
 export default EmptyMsg;

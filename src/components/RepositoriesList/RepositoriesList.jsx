@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
 
-import Repository from "./Repository";
-
 import { gitDataSelectors } from "../../redux/gitData";
+
+import Repository from "./Repository";
 
 import s from "./RepositoriesList.module.scss";
 
