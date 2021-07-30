@@ -2,7 +2,7 @@ import axios from "axios";
 
 axios.defaults.headers.common[
     "Authorization"
-] = `Bearer ${process.env.REACT_APP_AUTH_TOKEN}`;
+] = `Bearer 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`;
 
 export const fetchRepoWithSearchGitApi = async (
     searchQuery,
