@@ -1,7 +1,7 @@
 import axios from "axios";
 
 axios.defaults.headers.common["Authorization"] =
-    "Bearer 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";
+    "Bearer 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";
 
 export const fetchRepoWithSearchGitApi = async (
     searchQuery,
