@@ -2,6 +2,7 @@
   "name": "git-api",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://skipin-maksim.github.io/git-api",
   "dependencies": {
     "@octokit/core": "^3.5.1",
     "@octokit/request": "^5.6.0",
@@ -11,6 +12,7 @@
     "@testing-library/user-event": "^12.8.3",
     "antd": "^4.16.7",
     "axios": "^0.21.1",
+    "gh-pages": "^3.2.3",
     "lodash.debounce": "^4.0.8",
     "modern-normalize": "^1.1.0",
     "node-sass": "^6.0.1",
@@ -29,7 +31,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
