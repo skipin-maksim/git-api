@@ -3,8 +3,8 @@ import { useSelector } from "react-redux";
 import { Skeleton } from "antd";
 
 import {
-    getDataForLeftList,
-    getDataForRightList,
+    creatDataForLeftList,
+    createDataForRightList,
 } from "../../helpers/languagesDataHelper";
 import { fetchLanguages } from "../../services/gitAPI";
 import { gitDataSelectors } from "../../redux/gitData";
@@ -37,8 +37,8 @@ const Repository = ({ repository }) => {
         setLanguages(stringLanguages);
     };
 
-    const dataForLeftList = getDataForLeftList(repository, languages);
-    const dataForRightList = getDataForRightList(repository);
+    const dataForLeftList = creatDataForLeftList(repository, languages);
+    const dataForRightList = createDataForRightList(repository);
 
     useEffect(() => {
         getLanguages();

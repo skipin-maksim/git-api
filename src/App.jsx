@@ -14,6 +14,7 @@ import Form from "./components/Form/Form";
 import EmptyMsg from "./components/EmptyMsg/EmptyMsg";
 
 import s from "./App.module.scss";
+import ErrorMsg from "./components/ErrorMsg/ErrorMsg";
 
 const App = () => {
     const dispatch = useDispatch();
@@ -23,12 +24,18 @@ const App = () => {
     const [inputSearchValue, setInputSearchValue] = useState("");
 
     const { getSearchValue, getPerPage, getPage } = searchDataSelectors;
-    const { getAllRepositoriesList, getTotalCount, getIsLoading, getIsEmpty } =
-        gitDataSelectors;
+    const {
+        getAllRepositoriesList,
+        getTotalCount,
+        getIsLoading,
+        getIsEmpty,
+        getError,
+    } = gitDataSelectors;
 
     const repositoriesList = useSelector(getAllRepositoriesList);
     const isLoading = useSelector(getIsLoading);
     const isEmpty = useSelector(getIsEmpty);
+    const isError = useSelector(getError);
     let totalCount = useSelector(getTotalCount);
     const currentSearchValue = useSelector(getSearchValue);
     const currentSearchPerPage = useSelector(getPerPage);
@@ -119,6 +126,8 @@ const App = () => {
 
             <div className={s.content}>
                 {isEmpty && <EmptyMsg value={currentSearchValue} />}
+
+                {isError && <ErrorMsg error={isError} />}
 
                 {repositoriesList.length > 0 && (
                     <>

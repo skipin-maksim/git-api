@@ -1,7 +1,7 @@
 import axios from "axios";
 
 axios.defaults.headers.common["Authorization"] =
-    "Bearer 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";
+    "Bearer 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";
 
 export const fetchRepoWithSearchGitApi = async (
     searchQuery,
@@ -15,10 +15,13 @@ export const fetchRepoWithSearchGitApi = async (
 
         return { ...data, page, per_page, searchQuery };
     } catch (err) {
-        console.log(err);
+        const { response } = err;
 
-        if (err.response.status === 403)
-            return { status: 403, message: "Request limit reached" };
+        if (response.status === 401)
+            return { status: 401, message: response.data.message };
+
+        if (response.status === 403)
+            return { status: 403, message: response.data.message };
 
         return [];
     }
@@ -30,8 +33,6 @@ export const fetchLanguages = async url => {
 
         return data;
     } catch (err) {
-        console.log(err);
-
         if (err.response.status === 403)
             return { status: 403, message: "Request limit reached" };
 

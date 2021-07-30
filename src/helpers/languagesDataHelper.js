@@ -1,7 +1,7 @@
 import starIcon from "../assets/star-icon.svg";
 import watchersIcon from "../assets/watchers-icon.svg";
 
-export const getDataForLeftList = (item, languages) => {
+export const creatDataForLeftList = (item, languages) => {
     const { name, owner, description } = item;
     return [
         { value: name, title: "Repo name" },
@@ -11,7 +11,7 @@ export const getDataForLeftList = (item, languages) => {
     ];
 };
 
-export const getDataForRightList = item => {
+export const createDataForRightList = item => {
     const { stargazers_count, watchers_count } = item;
     return [
         { value: stargazers_count, title: "stars", icon: starIcon },

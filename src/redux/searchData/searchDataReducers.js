@@ -9,12 +9,12 @@ const currentPage = createReducer(1, {
 
 const perPage = createReducer(10, {
     [searchDataActions.writeSearchData]: (state, { payload }) =>
-        payload.perPage,
+        payload?.perPage,
 });
 
 const searchValue = createReducer("react", {
     [searchDataActions.writeSearchData]: (state, { payload }) =>
-        payload.searchValue,
+        payload?.searchValue,
 });
 
 export default combineReducers({

@@ -4,12 +4,12 @@ import { gitDataActions } from ".";
 
 const repositoriesList = createReducer([], {
     [gitDataActions.fetchRepositoriesSuccess]: (state, { payload }) =>
-        payload.items,
+        payload?.items,
 });
 
 const total_count = createReducer(0, {
     [gitDataActions.fetchRepositoriesSuccess]: (state, { payload }) =>
-        payload.total_count,
+        payload?.total_count,
 });
 
 const isLoading = createReducer(false, {
@@ -18,7 +18,12 @@ const isLoading = createReducer(false, {
 
 const isEmpty = createReducer(false, {
     [gitDataActions.fetchRepositoriesSuccess]: (state, { payload }) =>
-        payload.items.length === 0,
+        payload?.items.length === 0,
+});
+
+const error = createReducer(null, {
+    [gitDataActions.fetchRepositoriesError]: (state, { payload }) =>
+        payload || null,
 });
 
 export default combineReducers({
@@ -26,4 +31,5 @@ export default combineReducers({
     total_count,
     isLoading,
     isEmpty,
+    error,
 });

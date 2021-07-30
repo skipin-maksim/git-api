@@ -13,6 +13,10 @@ const fetchRepositories = (searchQuery, perPage, page) => async dispatch => {
             perPage,
         );
 
+        if (response.status !== 200) {
+            throw response;
+        }
+
         dispatch(gitDataActions.fetchRepositoriesSuccess(response.data));
 
         dispatch(
@@ -23,11 +27,11 @@ const fetchRepositories = (searchQuery, perPage, page) => async dispatch => {
             }),
         );
     } catch (error) {
-        dispatch(gitDataActions.fetchRepositoriesError());
+        dispatch(gitDataActions.fetchRepositoriesError(error.message));
 
-        console.error(error);
+        return [];
     } finally {
-        //For a longer lasting effect, skeleton
+        //For a longer lasting effect skeleton :)
         setTimeout(() => {
             dispatch(gitDataActions.isLoading(false));
         }, 700);
