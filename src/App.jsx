@@ -133,15 +133,17 @@ const App = () => {
                     <>
                         <RepositoriesList />
 
-                        <Pagination
-                            total={totalCount}
-                            current={currentSearchPage}
-                            defaultPageSize={currentSearchPerPage}
-                            showSizeChanger={false}
-                            onChange={handleOnChangePagination}
-                            size={"small"}
-                            itemRender={itemRender}
-                        />
+                        {totalCount > currentSearchPerPage && (
+                            <Pagination
+                                total={totalCount}
+                                current={currentSearchPage}
+                                defaultPageSize={currentSearchPerPage}
+                                showSizeChanger={false}
+                                onChange={handleOnChangePagination}
+                                size={"small"}
+                                itemRender={itemRender}
+                            />
+                        )}
                     </>
                 )}
             </div>
